@@ -1,0 +1,89 @@
+{
+  "id": 3,
+  "seed": 500321,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "strawberry",
+        "blueberry"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 90,
+      "remainingPatienceSeconds": 90,
+      "createdAt": 0
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      6,
+      8,
+      13
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_3",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_3",
+      "toJarId": "jar_4",
+      "count": 2,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 4,
+    "nodesExplored": 20,
+    "branchingFactor": 2.1,
+    "deadEndRatio": 0.12
+  }
+}

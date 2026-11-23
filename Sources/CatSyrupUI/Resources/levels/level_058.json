@@ -1,0 +1,119 @@
+{
+  "id": 58,
+  "seed": 506206,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "lemon",
+        "lemon",
+        "lemon",
+        "lemon"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "kiwi",
+        "kiwi",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_6",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "strawberry",
+        "strawberry"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 120,
+      "remainingPatienceSeconds": 120,
+      "createdAt": 0
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 120,
+      "remainingPatienceSeconds": 120,
+      "createdAt": 1
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      6,
+      8,
+      13
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_6",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_2",
+      "count": 2,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_5",
+      "count": 3,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 4,
+    "nodesExplored": 19,
+    "branchingFactor": 2.1,
+    "deadEndRatio": 0.12
+  }
+}

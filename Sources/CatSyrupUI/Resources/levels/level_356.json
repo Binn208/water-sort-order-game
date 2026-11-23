@@ -1,0 +1,239 @@
+{
+  "id": 356,
+  "seed": 538092,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "orange",
+        "grape",
+        "kiwi"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "lemon",
+        "lemon",
+        "kiwi",
+        "lemon"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "grape",
+        "grape",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_6",
+      "capacity": 4,
+      "layers": [
+        "orange",
+        "lemon",
+        "kiwi",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_7",
+      "capacity": 4,
+      "layers": [
+        "peach",
+        "peach",
+        "peach",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_8",
+      "capacity": 4,
+      "layers": [
+        "mint",
+        "mint",
+        "mint"
+      ]
+    },
+    {
+      "id": "jar_9",
+      "capacity": 4,
+      "layers": [
+        "grape",
+        "orange",
+        "orange"
+      ]
+    },
+    {
+      "id": "jar_10",
+      "capacity": 4,
+      "layers": [
+        "peach",
+        "blueberry",
+        "strawberry",
+        "mint"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 180,
+      "remainingPatienceSeconds": 180,
+      "createdAt": 0
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 180,
+      "remainingPatienceSeconds": 180,
+      "createdAt": 1
+    },
+    {
+      "id": "order_3",
+      "customerId": "cat_kuro",
+      "color": "lemon",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 180,
+      "remainingPatienceSeconds": 180,
+      "createdAt": 2
+    },
+    {
+      "id": "order_4",
+      "customerId": "cat_luna",
+      "color": "kiwi",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 180,
+      "remainingPatienceSeconds": 180,
+      "createdAt": 3
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      18,
+      23,
+      35
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_10",
+      "toJarId": "jar_8",
+      "count": 1,
+      "color": "mint"
+    },
+    {
+      "fromJarId": "jar_10",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_10",
+      "toJarId": "jar_4",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_4",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_6",
+      "count": 1,
+      "color": "kiwi"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_9",
+      "count": 1,
+      "color": "orange"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_2",
+      "count": 3,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_4",
+      "count": 2,
+      "color": "kiwi"
+    },
+    {
+      "fromJarId": "jar_3",
+      "toJarId": "jar_6",
+      "count": 1,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_3",
+      "toJarId": "jar_4",
+      "count": 1,
+      "color": "kiwi"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_3",
+      "count": 2,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_7",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 14,
+    "nodesExplored": 889,
+    "branchingFactor": 2.1,
+    "deadEndRatio": 0.12
+  }
+}

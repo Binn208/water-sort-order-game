@@ -1,0 +1,199 @@
+{
+  "id": 284,
+  "seed": 530388,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "strawberry",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "blueberry",
+        "peach",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "lemon",
+        "lemon",
+        "orange"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "kiwi",
+        "kiwi",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "grape",
+        "kiwi",
+        "lemon",
+        "lemon"
+      ]
+    },
+    {
+      "id": "jar_6",
+      "capacity": 4,
+      "layers": [
+        "orange",
+        "orange",
+        "peach",
+        "peach"
+      ]
+    },
+    {
+      "id": "jar_7",
+      "capacity": 4,
+      "layers": [
+        "peach",
+        "grape"
+      ]
+    },
+    {
+      "id": "jar_8",
+      "capacity": 4,
+      "layers": [
+        "grape",
+        "orange",
+        "grape"
+      ]
+    },
+    {
+      "id": "jar_9",
+      "capacity": 4,
+      "layers": [
+        "strawberry"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 165,
+      "remainingPatienceSeconds": 165,
+      "createdAt": 0
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 165,
+      "remainingPatienceSeconds": 165,
+      "createdAt": 1
+    },
+    {
+      "id": "order_3",
+      "customerId": "cat_kuro",
+      "color": "lemon",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 165,
+      "remainingPatienceSeconds": 165,
+      "createdAt": 2
+    },
+    {
+      "id": "order_4",
+      "customerId": "cat_luna",
+      "color": "kiwi",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 165,
+      "remainingPatienceSeconds": 165,
+      "createdAt": 3
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      12,
+      16,
+      24
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_9",
+      "count": 3,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_7",
+      "toJarId": "jar_8",
+      "count": 1,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_7",
+      "count": 1,
+      "color": "peach"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 2,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_3",
+      "toJarId": "jar_1",
+      "count": 1,
+      "color": "orange"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_3",
+      "count": 2,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_4",
+      "count": 1,
+      "color": "kiwi"
+    }
+  ],
+  "metrics": {
+    "minMoves": 9,
+    "nodesExplored": 154,
+    "branchingFactor": 2.1,
+    "deadEndRatio": 0.12
+  }
+}

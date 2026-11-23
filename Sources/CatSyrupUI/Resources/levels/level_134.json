@@ -1,0 +1,180 @@
+{
+  "id": 134,
+  "seed": 514338,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "lemon",
+        "grape",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "blueberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": []
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "kiwi",
+        "kiwi",
+        "kiwi"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "lemon",
+        "lemon",
+        "grape"
+      ]
+    },
+    {
+      "id": "jar_6",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "grape",
+        "lemon"
+      ]
+    },
+    {
+      "id": "jar_7",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "grape"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 135,
+      "remainingPatienceSeconds": 135,
+      "createdAt": 0
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 135,
+      "remainingPatienceSeconds": 135,
+      "createdAt": 1
+    },
+    {
+      "id": "order_3",
+      "customerId": "cat_kuro",
+      "color": "lemon",
+      "count": 1,
+      "fulfilledCount": 0,
+      "maxPatienceSeconds": 135,
+      "remainingPatienceSeconds": 135,
+      "createdAt": 2
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      14,
+      19,
+      29
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_7",
+      "count": 1,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_7",
+      "toJarId": "jar_6",
+      "count": 2,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_7",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_3",
+      "count": 1,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_3",
+      "count": 3,
+      "color": "grape"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_6",
+      "count": 3,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_7",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_2",
+      "count": 3,
+      "color": "lemon"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_7",
+      "count": 1,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 11,
+    "nodesExplored": 83,
+    "branchingFactor": 2.1,
+    "deadEndRatio": 0.12
+  }
+}
