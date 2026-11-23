@@ -1,0 +1,169 @@
+{
+  "id": 44,
+  "seed": 106062,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "orange",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "orange",
+        "orange"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "kiwi",
+        "kiwi",
+        "strawberry",
+        "kiwi"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry",
+        "orange"
+      ]
+    },
+    {
+      "id": "jar_6",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "maxPatienceSeconds": 120
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "maxPatienceSeconds": 120
+    },
+    {
+      "id": "order_3",
+      "customerId": "cat_boba",
+      "color": "orange",
+      "count": 1,
+      "maxPatienceSeconds": 120
+    },
+    {
+      "id": "order_4",
+      "customerId": "cat_luna",
+      "color": "kiwi",
+      "count": 1,
+      "maxPatienceSeconds": 120
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      14,
+      19,
+      29
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_3",
+      "count": 1,
+      "color": "orange"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_6",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_1",
+      "count": 2,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_3",
+      "count": 1,
+      "color": "orange"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "kiwi"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_4",
+      "count": 2,
+      "color": "kiwi"
+    },
+    {
+      "fromJarId": "jar_6",
+      "toJarId": "jar_1",
+      "count": 2,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_5",
+      "toJarId": "jar_6",
+      "count": 3,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 11,
+    "nodesExplored": 111,
+    "branchingFactor": 2.2,
+    "deadEndRatio": 0.15
+  }
+}
