@@ -50,30 +50,28 @@ jobs:
             -scheme CatSyrupCafe \
             -configuration Release \
             -sdk iphoneos \
-            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=YES \
+            CODE_SIGN_IDENTITY="" \
             BUILD_DIR=./build 2>&1 | tee xcodebuild.log
 
-      - name: Publish Build Output to Job Summary
+      - name: Publish Build Output to Job Summary and Annotations
         if: always()
         run: |
           echo "## Xcodebuild Output" >> $GITHUB_STEP_SUMMARY
           echo '```text' >> $GITHUB_STEP_SUMMARY
           if [ -f xcodebuild.log ]; then
             tail -n 200 xcodebuild.log >> $GITHUB_STEP_SUMMARY
+            echo "Publishing annotations..."
+            tail -n 25 xcodebuild.log | while IFS= read -r line; do
+              if [ -n "$line" ]; then
+                echo "::error title=XcodeOutput::$line"
+              fi
+            done
           else
             echo "No xcodebuild.log generated." >> $GITHUB_STEP_SUMMARY
           fi
           echo '```' >> $GITHUB_STEP_SUMMARY
-
-      - name: Upload Build Log on Failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-failure-log
-          path: xcodebuild.log
-          retention-days: 7
 
       - name: Package IPA
         if: success()
