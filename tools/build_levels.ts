@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { generateLevel, GeneratorParams } from '../src/generator/generator';
-import { LevelDefinition } from '../src/engine/types';
 
 const LEVELS_DIR = path.resolve(import.meta.dirname, '../levels');
 const REPORT_PATH = path.resolve(import.meta.dirname, '../docs/LEVEL_REPORT.md');

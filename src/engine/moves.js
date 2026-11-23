@@ -56,7 +56,8 @@ export function computePourAmount(source, target) {
     return Math.min(sourceRun.count, availableSpace);
 }
 /**
- * Generates all legal moves available in the given game state.
+ * Generates all legal moves available in the given game state in deterministic order.
+ * Order: sorted by fromJarId ascending, then toJarId ascending.
  */
 export function legalMoves(state) {
     if (state.isWon)
@@ -88,5 +89,11 @@ export function legalMoves(state) {
             }
         }
     }
-    return moves;
+    // Deterministic sort: fromJarId asc, then toJarId asc
+    return moves.sort((a, b) => {
+        const cmp = a.fromJarId.localeCompare(b.fromJarId);
+        if (cmp !== 0)
+            return cmp;
+        return a.toJarId.localeCompare(b.toJarId);
+    });
 }

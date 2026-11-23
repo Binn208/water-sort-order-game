@@ -1,0 +1,22 @@
+{
+  "levelTitle": "Màn {lvl}",
+  "movesCount": "{moves} bước",
+  "undo": "Hoàn tác",
+  "addJar": "+ Bình",
+  "hint": "Gợi ý",
+  "winTitle": "🎉 Hoàn Thành Xuất Sắc!",
+  "winDesc": "Tất cả các bạn mèo đều đã nhận được siro thơm ngon!",
+  "nextLevel": "Tiếp tục (Màn kế)",
+  "stuckTitle": "🐾 Hết Nước Đi Rồi!",
+  "stuckDesc": "Đừng lo, tiệm siro luôn có cách giúp bạn:",
+  "freeRescue": "🧪 Nhận Bình Rỗng Miễn Phí",
+  "undoPrev": "↩️ Hoàn Tác Nước Trước",
+  "restart": "🔄 Chơi Lại Màn Này",
+  "settingsTitle": "⚙️ Cài Đặt",
+  "sound": "Âm thanh (SFX)",
+  "music": "Nhạc nền (BGM)",
+  "colorblind": "Chế độ Hỗ trợ Mù Màu",
+  "haptics": "Rung (Haptics)",
+  "language": "Ngôn ngữ",
+  "close": "Đóng"
+}

@@ -59,7 +59,8 @@ export function computePourAmount(source: Jar, target: Jar): number {
 }
 
 /**
- * Generates all legal moves available in the given game state.
+ * Generates all legal moves available in the given game state in deterministic order.
+ * Order: sorted by fromJarId ascending, then toJarId ascending.
  */
 export function legalMoves(state: GameState): Move[] {
   if (state.isWon) return [];
@@ -93,5 +94,10 @@ export function legalMoves(state: GameState): Move[] {
     }
   }
 
-  return moves;
+  // Deterministic sort: fromJarId asc, then toJarId asc
+  return moves.sort((a, b) => {
+    const cmp = a.fromJarId.localeCompare(b.fromJarId);
+    if (cmp !== 0) return cmp;
+    return a.toJarId.localeCompare(b.toJarId);
+  });
 }

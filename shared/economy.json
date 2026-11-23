@@ -1,0 +1,52 @@
+{
+  "currency": {
+    "name": "Cat Coins",
+    "initialBalance": 100
+  },
+  "rewards": {
+    "levelClearBase": 20,
+    "starBonus": 10,
+    "firstClearBonus": 30
+  },
+  "tools": {
+    "undo": {
+      "initialCount": 5,
+      "costCoins": 30,
+      "description": "Revert the last move"
+    },
+    "addJar": {
+      "initialCount": 3,
+      "costCoins": 50,
+      "description": "Add an extra empty jar for more maneuver room"
+    },
+    "hint": {
+      "initialCount": 3,
+      "costCoins": 25,
+      "description": "Show the optimal next move calculated by solver"
+    }
+  },
+  "rescue": {
+    "freeRescueJarsPerLevel": 1,
+    "description": "Every level guarantees at least 1 free empty rescue jar when stuck without ads or payment"
+  },
+  "monetization": {
+    "enabled": false,
+    "rewardedAds": {
+      "enabled": false,
+      "rewardCoins": 50,
+      "optional": true
+    },
+    "interstitialAds": {
+      "enabled": false,
+      "disabledBeforeLevel": 15,
+      "minIntervalSeconds": 90,
+      "maxPerLevels": 3,
+      "neverOnFailureOrStuck": true,
+      "neverInTutorial": true
+    },
+    "noAdsIap": {
+      "removesInterstitials": true,
+      "keepsRewardedAdsOptional": true
+    }
+  }
+}

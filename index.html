@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FF758F">
+  <meta name="description" content="Meow Syrup: Color Sort Cafe - 100% Offline Cozy Water Sort Puzzle">
+  <link rel="manifest" href="/manifest.webmanifest">
   <title>Meow Syrup: Color Sort Cafe</title>
   <style>
     :root {
@@ -545,5 +548,14 @@
   </div>
 
   <script type="module" src="/src/main.ts"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.warn('SW registration skipped:', err);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
