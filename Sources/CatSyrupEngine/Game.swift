@@ -158,3 +158,43 @@ public enum Game {
         return nextState
     }
 }
+
+public final class GameEngine {
+    public var state: GameState
+    public let level: LevelDefinition
+
+    public init(level: LevelDefinition) {
+        self.level = level
+        self.state = Game.createGame(level: level)
+    }
+
+    public func applyMove(_ move: Move) -> (success: Bool, state: GameState) {
+        let prevCount = state.moveCount
+        state = Game.applyMove(state: state, move: move)
+        return (state.moveCount > prevCount, state)
+    }
+
+    public func undo() -> Bool {
+        guard !state.history.isEmpty else { return false }
+        state = Game.undoMove(state: state)
+        return true
+    }
+
+    public func reset() {
+        state = Game.createGame(level: level)
+    }
+
+    public func addRescueJar() -> Jar? {
+        guard state.freeRescueAvailable else { return nil }
+        let prevCount = state.jars.count
+        state = Game.addRescueJar(state: state)
+        if state.jars.count > prevCount {
+            return state.jars.last
+        }
+        return nil
+    }
+
+    public func legalMoves() -> [Move] {
+        return Moves.legalMoves(state: state)
+    }
+}

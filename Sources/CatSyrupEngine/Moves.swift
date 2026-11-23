@@ -14,6 +14,10 @@ public enum Moves {
         return (color, count)
     }
 
+    public static func getTopColorRun(_ jar: Jar) -> (color: String, count: Int)? {
+        getTopColorRun(jar: jar)
+    }
+
     public static func canPour(source: Jar, target: Jar) -> Bool {
         if source.id == target.id { return false }
         if source.layers.isEmpty { return false }
@@ -25,11 +29,19 @@ public enum Moves {
         return target.layers.last == sourceRun.color
     }
 
+    public static func canPour(_ source: Jar, _ target: Jar) -> Bool {
+        canPour(source: source, target: target)
+    }
+
     public static func computePourAmount(source: Jar, target: Jar) -> Int {
         guard canPour(source: source, target: target) else { return 0 }
         guard let sourceRun = getTopColorRun(jar: source) else { return 0 }
         let space = target.capacity - target.layers.count
         return min(sourceRun.count, space)
+    }
+
+    public static func computePourAmount(_ source: Jar, _ target: Jar) -> Int {
+        computePourAmount(source: source, target: target)
     }
 
     public static func legalMoves(state: GameState) -> [Move] {

@@ -244,13 +244,14 @@ public struct GameView: View {
                 return
             }
             if let src = game.state.jars.first(where: { $0.id == fromId }) {
-                if Moves.canPour(src, jar) {
-                    let amt = Moves.computePourAmount(src, jar)
-                    let run = Moves.getTopColorRun(src)!
-                    let res = game.applyMove(Move(fromJarId: src.id, toJarId: jar.id, count: amt, color: run.color))
-                    if res.success {
-                        if game.state.isWon {
-                            showWinModal = true
+                if Moves.canPour(source: src, target: jar) {
+                    let amt = Moves.computePourAmount(source: src, target: jar)
+                    if let run = Moves.getTopColorRun(jar: src) {
+                        let res = game.applyMove(Move(fromJarId: src.id, toJarId: jar.id, count: amt, color: run.color))
+                        if res.success {
+                            if game.state.isWon {
+                                showWinModal = true
+                            }
                         }
                     }
                 }
