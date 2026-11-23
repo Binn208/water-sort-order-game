@@ -1,0 +1,76 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [ "main", "ios" ]
+  pull_request:
+    branches: [ "main", "ios" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-ipa:
+    name: Build & Export IPA
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        run: |
+          echo "Available Xcode versions on runner:"
+          ls -d /Applications/Xcode* || true
+          if [ -d "/Applications/Xcode_16.0.app" ]; then
+            sudo xcode-select -switch /Applications/Xcode_16.0.app
+          elif [ -d "/Applications/Xcode_15.4.app" ]; then
+            sudo xcode-select -switch /Applications/Xcode_15.4.app
+          fi
+          xcodebuild -version
+
+      - name: Install XcodeGen
+        run: |
+          brew install xcodegen
+
+      - name: Generate Xcode Project
+        run: |
+          xcodegen generate
+
+      - name: Build Application (.app)
+        run: |
+          xcodebuild clean build \
+            -project CatSyrupCafe.xcodeproj \
+            -scheme CatSyrupCafe \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            BUILD_DIR=./build
+
+      - name: Package IPA
+        run: |
+          echo "Packaging .app into .ipa..."
+          mkdir -p Payload
+          APP_PATH=$(find build -name "CatSyrupCafe.app" -type d | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: CatSyrupCafe.app not found in build directory!"
+            find build -maxdepth 4 || true
+            exit 1
+          fi
+          echo "Found app at: $APP_PATH"
+          cp -R "$APP_PATH" Payload/
+          zip -r -q CatSyrupCafe.ipa Payload
+          echo "IPA successfully created:"
+          ls -lh CatSyrupCafe.ipa
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CatSyrupCafe-iOS-ipa
+          path: CatSyrupCafe.ipa
+          retention-days: 14

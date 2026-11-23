@@ -4,6 +4,30 @@ Game giải đố phân loại màu siro theo đơn hàng dành riêng cho hệ 
 
 ---
 
+## 🚀 TẢI VÀ CÀI ĐẶT FILE .IPA (AUTOMATIC CI/CD)
+
+Repository này đã được tích hợp sẵn **GitHub Actions** tự động biên dịch trên máy chủ macOS và đóng gói thành file **`.ipa`** mỗi khi có cập nhật hoặc kích hoạt thủ công.
+
+### 📥 Cách tải file .ipa từ GitHub Actions:
+1. Truy cập vào tab **[Actions](https://github.com/Binn208/water-sort-order-game/actions)** trên repository GitHub.
+2. Chọn lần chạy workflow mới nhất có tên **"Build iOS IPA"**.
+3. Cuộn xuống phần **Artifacts** ở dưới cùng trang.
+4. Bấm vào **`CatSyrupCafe-iOS-ipa`** để tải file `.zip` chứa file **`CatSyrupCafe.ipa`** về máy tính của bạn.
+
+*(Mẹo: Bạn cũng có thể vào tab Actions > chọn workflow "Build iOS IPA" > bấm nút **Run workflow** để yêu cầu hệ thống tự build file IPA mới bất cứ lúc nào!)*
+
+### 📱 Cách cài file .ipa lên iPhone (Miễn phí, không cần tài khoản Dev trả phí):
+1. **Dùng Sideloadly (Khuyên dùng - Cực dễ trên Windows & Mac)**:
+   - Tải Sideloadly tại [sideloadly.io](https://sideloadly.io/).
+   - Cắm iPhone vào máy tính qua cáp sạc.
+   - Kéo file `CatSyrupCafe.ipa` vừa tải vào Sideloadly.
+   - Nhập Apple ID của bạn (để Apple cấp chứng chỉ miễn phí 7 ngày) rồi bấm **Start**.
+   - Trên iPhone, vào **Cài đặt** > **Cài đặt chung** > **Quản lý VPN & Thiết bị** > Bấm **Tin cậy** chứng chỉ Apple ID của bạn.
+2. **Dùng AltStore / TrollStore / Scarlet / Esign**:
+   - Mở app AltStore hoặc TrollStore trên iPhone > Chọn file `CatSyrupCafe.ipa` và tiến hành cài đặt.
+
+---
+
 ## 🌟 ĐẶC ĐIỂM NỔI BẬT
 
 1. **Giao diện SwiftUI Chân thực**:
@@ -43,8 +67,12 @@ Game giải đố phân loại màu siro theo đơn hàng dành riêng cho hệ 
 
 ```
 .
+├── .github/workflows/
+│   └── build-ipa.yml                         # GitHub Actions tự động build & export file .ipa
+├── project.yml                               # Cấu hình dự án cho XcodeGen
+├── Info.plist                                # Cấu hình bundle iOS App
 ├── Package.swift                             # Cấu hình Swift Package Manager (mở bằng Xcode)
-├── README.md                                 # Tài liệu dự án
+├── README.md                                 # Tài liệu dự án & Hướng dẫn cài đặt
 ├── Sources/
 │   ├── CatSyrupEngine/                       # Lõi Engine Swift thuần logic
 │   │   ├── Models.swift                      # Struct Jar, Order, Move, GameState
