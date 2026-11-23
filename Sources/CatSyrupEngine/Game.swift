@@ -176,7 +176,7 @@ public final class GameEngine {
 
     public func undo() -> Bool {
         guard !state.history.isEmpty else { return false }
-        state = Game.undoMove(state: state)
+        state = Game.undo(state: state)
         return true
     }
 
