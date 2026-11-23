@@ -26,7 +26,7 @@ jobs:
 
       - name: Set up Xcode
         run: |
-          echo "Current Xcode version:"
+          echo "Xcode version:"
           xcodebuild -version
 
       - name: Install XcodeGen
@@ -37,8 +37,14 @@ jobs:
         run: |
           xcodegen generate
 
-      - name: Build Application (.app)
+      - name: Inspect Generated Project & Schemes
         run: |
+          xcodebuild -list -project CatSyrupCafe.xcodeproj
+
+      - name: Build Application (.app)
+        id: build_step
+        run: |
+          set -o pipefail
           xcodebuild clean build \
             -project CatSyrupCafe.xcodeproj \
             -scheme CatSyrupCafe \
@@ -48,9 +54,26 @@ jobs:
             CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=YES \
-            BUILD_DIR=./build
+            BUILD_DIR=./build 2>&1 | tee xcodebuild.log
+
+      - name: Print Build Errors if Failed
+        if: failure()
+        run: |
+          echo "=== XCODEBUILD FAILED - SUMMARY OF ERRORS ==="
+          grep -E "(error:|fatal error:)" xcodebuild.log || true
+          echo "=== LAST 80 LINES OF LOG ==="
+          tail -n 80 xcodebuild.log
+
+      - name: Upload Build Log on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-failure-log
+          path: xcodebuild.log
+          retention-days: 7
 
       - name: Package IPA
+        if: success()
         run: |
           echo "Packaging .app into .ipa..."
           mkdir -p Payload
@@ -67,6 +90,7 @@ jobs:
           ls -lh CatSyrupCafe.ipa
 
       - name: Upload IPA Artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: CatSyrupCafe-iOS-ipa

@@ -4,6 +4,14 @@ options:
   deploymentTarget:
     iOS: "16.0"
 
+schemes:
+  CatSyrupCafe:
+    build:
+      targets:
+        CatSyrupCafe: all
+    run:
+      config: Release
+
 settings:
   base:
     SWIFT_VERSION: "5.9"
