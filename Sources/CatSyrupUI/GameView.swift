@@ -1,5 +1,7 @@
 import SwiftUI
+#if canImport(CatSyrupEngine)
 import CatSyrupEngine
+#endif
 
 public struct SyrupPalette {
     public let topColor: Color
