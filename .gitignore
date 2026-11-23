@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-app/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+android/app/build/
+android/.gradle/

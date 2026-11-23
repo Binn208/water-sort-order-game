@@ -1,0 +1,29 @@
+{
+  "name": "cat-syrup-sort",
+  "version": "1.0.0",
+  "description": "Commercial-grade offline Water Sort + Orders puzzle game featuring Cat Syrup Cafe theme",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:engine": "vitest run tests/engine",
+    "test:solver": "vitest run tests/solver",
+    "build:levels": "tsx tools/build_levels.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "fast-check": "^3.23.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "pixi.js": "^8.6.6"
+  }
+}
