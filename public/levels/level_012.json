@@ -1,0 +1,128 @@
+{
+  "id": 12,
+  "seed": 102261,
+  "jars": [
+    {
+      "id": "jar_1",
+      "capacity": 4,
+      "layers": [
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_2",
+      "capacity": 4,
+      "layers": [
+        "blueberry",
+        "strawberry",
+        "blueberry"
+      ]
+    },
+    {
+      "id": "jar_3",
+      "capacity": 4,
+      "layers": [
+        "orange",
+        "orange",
+        "orange",
+        "strawberry"
+      ]
+    },
+    {
+      "id": "jar_4",
+      "capacity": 4,
+      "layers": [
+        "strawberry",
+        "blueberry",
+        "orange"
+      ]
+    },
+    {
+      "id": "jar_5",
+      "capacity": 4,
+      "layers": [
+        "strawberry"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1",
+      "customerId": "cat_mochi",
+      "color": "strawberry",
+      "count": 1,
+      "maxPatienceSeconds": 105
+    },
+    {
+      "id": "order_2",
+      "customerId": "cat_mimi",
+      "color": "blueberry",
+      "count": 1,
+      "maxPatienceSeconds": 105
+    },
+    {
+      "id": "order_3",
+      "customerId": "cat_boba",
+      "color": "orange",
+      "count": 1,
+      "maxPatienceSeconds": 105
+    }
+  ],
+  "starThresholds": {
+    "moves": [
+      10,
+      13,
+      20
+    ]
+  },
+  "solution": [
+    {
+      "fromJarId": "jar_1",
+      "toJarId": "jar_2",
+      "count": 1,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_3",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_3",
+      "count": 1,
+      "color": "orange"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_4",
+      "count": 2,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_2",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "strawberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_2",
+      "count": 3,
+      "color": "blueberry"
+    },
+    {
+      "fromJarId": "jar_4",
+      "toJarId": "jar_5",
+      "count": 1,
+      "color": "strawberry"
+    }
+  ],
+  "metrics": {
+    "minMoves": 7,
+    "nodesExplored": 55,
+    "branchingFactor": 2.2,
+    "deadEndRatio": 0.15
+  }
+}

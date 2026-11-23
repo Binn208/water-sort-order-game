@@ -1,0 +1,14 @@
+{
+  "appId": "com.catsyrup.colorsortcafe",
+  "appName": "Meow Syrup",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#FFF9F2",
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  }
+}

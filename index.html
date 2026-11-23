@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Meow Syrup: Color Sort Cafe</title>
+  <style>
+    :root {
+      --bg-color: #FFF9F2;
+      --card-bg: #FFFFFF;
+      --accent: #FF758F;
+      --accent-dark: #E63946;
+      --text-main: #3D2C2E;
+      --text-muted: #8E7D7F;
+      --board-bg: #FFEAD8;
+      --jar-glass: rgba(255, 255, 255, 0.45);
+      --jar-border: #D8B4A6;
+      --jar-shadow: rgba(140, 90, 80, 0.15);
+      --success: #2ECC71;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      margin: 0;
+      padding: 0;
+      touch-action: manipulation;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: linear-gradient(180deg, #FFF9F2 0%, #FFF0E4 100%);
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    /* Top HUD */
+    .hud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      z-index: 10;
+    }
+
+    .level-badge {
+      background: #FFE3D1;
+      color: #9C4126;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 2px solid #F5C4A6;
+    }
+
+    .hud-moves {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .hud-btn {
+      min-width: 44px;
+      min-height: 44px;
+      background: #FFF;
+      border: 2px solid #EAD8CD;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.1s ease;
+    }
+
+    .hud-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Customer Queue / Orders */
+    .orders-bar {
+      display: flex;
+      gap: 10px;
+      padding: 4px 16px 8px;
+      overflow-x: auto;
+      min-height: 85px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .customer-card {
+      background: #FFF;
+      border: 2px solid #F0DACE;
+      border-radius: 16px;
+      padding: 6px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 74px;
+      position: relative;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+    }
+
+    .customer-card.completed {
+      background: #E8F8F0;
+      border-color: #2ECC71;
+    }
+
+    .customer-avatar {
+      font-size: 26px;
+      margin-bottom: 2px;
+    }
+
+    .order-bubble {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .order-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      display: inline-block;
+      border: 1px solid rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .order-symbol {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8px;
+      color: #FFF;
+      text-shadow: 0 0 1px #000;
+      font-weight: 900;
+    }
+
+    .patience-bar-container {
+      width: 100%;
+      height: 4px;
+      background: #F0E0D6;
+      border-radius: 2px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .patience-bar {
+      height: 100%;
+      background: #2ECC71;
+      width: 100%;
+      transition: width 0.3s linear, background-color 0.3s ease;
+    }
+
+    /* Main Table & Jars */
+    .board-container {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      gap: 16px 20px;
+      padding: 10px 16px;
+      position: relative;
+    }
+
+    .jar-wrapper {
+      position: relative;
+      width: 58px;
+      height: 160px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      touch-action: none;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .jar-wrapper.selected {
+      transform: translateY(-16px) scale(1.06);
+    }
+
+    .jar-wrapper.valid-target .jar-glass {
+      box-shadow: 0 0 0 3px #2ECC71, 0 8px 16px rgba(46, 204, 113, 0.3);
+    }
+
+    .jar-cork {
+      width: 28px;
+      height: 10px;
+      background: #BA7C59;
+      border-radius: 4px 4px 1px 1px;
+      margin-bottom: -1px;
+      z-index: 2;
+      border: 1px solid #8A5538;
+      display: none;
+    }
+
+    .jar-mouth {
+      width: 38px;
+      height: 8px;
+      border: 3px solid var(--jar-border);
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 2;
+    }
+
+    .jar-glass {
+      width: 54px;
+      height: 145px;
+      border: 3px solid var(--jar-border);
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      background: var(--jar-glass);
+      backdrop-filter: blur(2px);
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.8), 0 6px 12px var(--jar-shadow);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column-reverse;
+      padding: 3px;
+    }
+
+    .liquid-layer {
+      width: 100%;
+      height: 25%;
+      position: relative;
+      transition: height 0.25s ease, background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .liquid-layer:first-child {
+      border-radius: 0 0 16px 16px;
+    }
+
+    .colorblind-mark {
+      font-size: 10px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      pointer-events: none;
+    }
+
+    /* Bottom Toolbar */
+    .toolbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 16px 20px;
+      background: #FFF;
+      border-top: 2px solid #F0E3D8;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+    }
+
+    .tool-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      min-width: 54px;
+      min-height: 48px;
+    }
+
+    .tool-icon-circle {
+      width: 48px;
+      height: 48px;
+      background: #FFF5EE;
+      border: 2px solid #E8D3C4;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 4px;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      transition: transform 0.15s ease;
+    }
+
+    .tool-btn:active .tool-icon-circle {
+      transform: scale(0.9);
+    }
+
+    .tool-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #FF6B81;
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+      border: 2px solid #FFF;
+    }
+
+    .tool-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Modals & Overlays */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(40, 25, 20, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-card {
+      background: #FFF;
+      border-radius: 28px;
+      padding: 24px 20px;
+      width: 88%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      border: 3px solid #F5DCC8;
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #5C321E;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: #FF758F;
+      color: #FFF;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 117, 143, 0.4);
+    }
+
+    .btn-secondary {
+      background: #F5EAE1;
+      color: #6E4935;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .stars-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 32px;
+      margin: 12px 0 18px;
+    }
+
+    .star {
+      color: #E2D3CA;
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .star.earned {
+      color: #FFB703;
+      transform: scale(1.15);
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Top HUD -->
+    <header class="hud-header">
+      <button id="btn-settings" class="hud-btn" aria-label="Settings">⚙️</button>
+      <div class="level-badge" id="hud-level">Màn 1</div>
+      <div class="hud-moves" id="hud-moves">0 bước</div>
+      <button id="btn-restart" class="hud-btn" aria-label="Restart">🔄</button>
+    </header>
+
+    <!-- Customer Queue / Orders -->
+    <section class="orders-bar" id="orders-container" aria-label="Orders"></section>
+
+    <!-- Game Table / Jars -->
+    <main class="board-container" id="board-container" aria-label="Jars Table"></main>
+
+    <!-- Bottom Toolbar -->
+    <footer class="toolbar">
+      <button id="btn-undo" class="tool-btn" aria-label="Undo">
+        <div class="tool-icon-circle">
+          ↩️
+          <span class="tool-badge" id="badge-undo">5</span>
+        </div>
+        <span class="tool-label">Hoàn tác</span>
+      </button>
+
+      <button id="btn-add-jar" class="tool-btn" aria-label="Add Empty Jar">
+        <div class="tool-icon-circle">
+          🧪+
+          <span class="tool-badge" id="badge-add-jar">3</span>
+        </div>
+        <span class="tool-label">+ Bình</span>
+      </button>
+
+      <button id="btn-hint" class="tool-btn" aria-label="Hint">
+        <div class="tool-icon-circle">
+          💡
+          <span class="tool-badge" id="badge-hint">3</span>
+        </div>
+        <span class="tool-label">Gợi ý</span>
+      </button>
+    </footer>
+
+    <!-- Win Modal -->
+    <div id="modal-win" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-title">🎉 Hoàn Thành Xuất Sắc!</div>
+        <div class="stars-row">
+          <span class="star earned">★</span>
+          <span class="star earned">★</span>
+          <span class="star earned">★</span>
+        </div>
+        <p class="modal-desc" id="win-desc">Tất cả các bạn mèo đều đã nhận được siro thơm ngon!</p>
+        <div class="modal-actions">
+          <button id="btn-next-level" class="btn-primary">Tiếp tục (Màn kế)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stuck Modal -->
+    <div id="modal-stuck" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-title">🐾 Hết Nước Đi Rồi!</div>
+        <p class="modal-desc">Đừng lo, tiệm siro luôn có cách giúp bạn:</p>
+        <div class="modal-actions">
+          <button id="btn-stuck-rescue" class="btn-primary">🧪 Nhận Bình Rỗng Miễn Phí</button>
+          <button id="btn-stuck-undo" class="btn-secondary">↩️ Hoàn Tác Nước Trước</button>
+          <button id="btn-stuck-restart" class="btn-secondary">🔄 Chơi Lại Màn Này</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="modal-settings" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-title">⚙️ Cài Đặt</div>
+        <div style="display:flex; flex-direction:column; gap:12px; margin: 16px 0; text-align:left; font-size:14px;">
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Âm thanh (SFX)</span>
+            <input type="checkbox" id="setting-sound" checked style="width:20px; height:20px;">
+          </label>
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Nhạc nền (BGM)</span>
+            <input type="checkbox" id="setting-music" checked style="width:20px; height:20px;">
+          </label>
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Chế độ Hỗ trợ Mù Màu</span>
+            <input type="checkbox" id="setting-colorblind" checked style="width:20px; height:20px;">
+          </label>
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Rung (Haptics)</span>
+            <input type="checkbox" id="setting-haptic" checked style="width:20px; height:20px;">
+          </label>
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Ngôn ngữ</span>
+            <select id="setting-lang" style="padding:4px 8px; border-radius:8px;">
+              <option value="vi">Tiếng Việt</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button id="btn-close-settings" class="btn-primary">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

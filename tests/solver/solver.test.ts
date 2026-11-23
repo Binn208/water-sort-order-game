@@ -50,5 +50,23 @@ describe('Solver BFS/A* & Solvability Certificates (Mục 5)', () => {
 
     const res = solve(deadEndLevel);
     expect(res.solvable).toBe(false);
+
+    const isStuckState = isDeadEnd({
+      levelId: 99,
+      capacity: 2,
+      jars: deadEndLevel.jars,
+      orders: deadEndLevel.orders.map((o, idx) => ({ ...o, fulfilledCount: 0, remainingPatienceSeconds: 60, createdAt: idx })),
+      deliveredColorsCount: {},
+      history: [],
+      moveCount: 0,
+      elapsedTimeSeconds: 0,
+      freeRescueAvailable: true,
+      addedRescueJarsCount: 0,
+      isWon: false,
+      isStuck: true,
+      starThresholds: deadEndLevel.starThresholds,
+      initialSupplies: { strawberry: 2, blueberry: 2 },
+    });
+    expect(isStuckState).toBe(true);
   });
 });
