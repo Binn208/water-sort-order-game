@@ -50,19 +50,22 @@ jobs:
             -scheme CatSyrupCafe \
             -configuration Release \
             -sdk iphoneos \
-            -destination "generic/platform=iOS" \
             CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=YES \
             BUILD_DIR=./build 2>&1 | tee xcodebuild.log
 
-      - name: Print Build Errors if Failed
-        if: failure()
+      - name: Publish Build Output to Job Summary
+        if: always()
         run: |
-          echo "=== XCODEBUILD FAILED - SUMMARY OF ERRORS ==="
-          grep -E "(error:|fatal error:)" xcodebuild.log || true
-          echo "=== LAST 80 LINES OF LOG ==="
-          tail -n 80 xcodebuild.log
+          echo "## Xcodebuild Output" >> $GITHUB_STEP_SUMMARY
+          echo '```text' >> $GITHUB_STEP_SUMMARY
+          if [ -f xcodebuild.log ]; then
+            tail -n 200 xcodebuild.log >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No xcodebuild.log generated." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Build Log on Failure
         if: failure()
